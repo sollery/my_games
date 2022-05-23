@@ -1,0 +1,17 @@
+{% extends "guess_the_number/base.html" %}
+{% block title %}Загадай число{% endblock %}
+{% block content %}
+<h1>Загадайте число от 1 до 1000</h1>
+<label id = 'text'>Введите число: </label>
+<input type="text" id="inp" value = ''>
+<input id="button" type="button" value="загадать">
+<h2 id ="out"></h2>
+    <form id="form" method="POST">
+        {% csrf_token %}
+        <div class = 'disp_none'>
+        <input id="time" type="text" name="time">
+        <input id="step" type="text" name="step"></div>
+     </form>
+    <h2>{{error}}</h2>
+<a href="{% url 'games_info' %}">Таблица результатов</a>
+{% endblock %}
