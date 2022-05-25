@@ -1,17 +1,38 @@
 {% extends "guess_the_number/base.html" %}
 {% block title %}Загадай число{% endblock %}
 {% block content %}
-<h1>Загадайте число от 1 до 1000</h1>
-<label id = 'text'>Введите число: </label>
+<h1>Загадайте число</h1>
+<div>
+<p>Выберите начало:</p>
+<input type="number" id="min_num" value = "0">
+<p>Выберите конец:</p>
+<input type="number" id="max_num" value = "0">
+</div>
+<div>
+    <h2 id ="out"></h2>
+</div>
+<label id = 'text'>Введите число:</label>
 <input type="text" id="inp" value = ''>
+<div>
 <input id="button" type="button" value="загадать">
-<h2 id ="out"></h2>
-    <form id="form" method="POST">
-        {% csrf_token %}
-        <div class = 'disp_none'>
-        <input id="time" type="text" name="time">
-        <input id="step" type="text" name="step"></div>
-     </form>
-    <h2>{{error}}</h2>
-<a href="{% url 'games_info' %}">Таблица результатов</a>
+</div>
+{% csrf_token %}
+<table class="mytable">
+        <thead class="table-dark">
+            <tr>
+                {% for i in values_columns %}
+                    <th>{{i}}</th>
+                {%endfor%}
+            </tr>
+        </thead>
+        <tbody id = 'tt'>
+                    {%for row in rows %}
+                <tr>
+                    <td>{{row.date}}</td>
+                    <td>{{row.game_time}}</td>
+                    <td>{{row.try_count}}</td>
+                </tr>
+                    {% endfor %}
+        </tbody>
+ </table>
 {% endblock %}
